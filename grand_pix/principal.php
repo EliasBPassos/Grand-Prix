@@ -20,10 +20,12 @@ if (!isset($_SESSION['idusuario'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<body style="background-color:  #EBE6E0">
+
+    <nav class="navbar navbar-expand-lg tableshadow" style="background-color: #b09b84;" >
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Capiboy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -34,50 +36,23 @@ if (!isset($_SESSION['idusuario'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Sair</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="col-md-12" id="others">
+        <div class="container mt-5">
+                <div class="card tableshadow"  id='conteudo'>
 
-
-
-
-
-    <div class="row vh-100" style="height: 100%">
-        <div class="col-md-2">
-            <br><br>
-            <button type="button" class="list-group-item list-group-item-action"
-                onclick="carregarConteudo('listarentrega')" id="btnlist">entregaS</button>
-
-        </div>
-        <div class="col-md-10" id="others">
-
-            <div class="container-fluid text-white" id='conteudo'>
-                <?php
+                    <?php
                 include_once "area.php";
-
+                
                 ?>
+                </div>
             </div>
-
         </div>
     </div>
 
@@ -95,26 +70,31 @@ if (!isset($_SESSION['idusuario'])) {
                         <div class="mb-3">
 
                             <label for="idceporigemadd" class="form-label">Cep da origem</label>
-                            <input type="text" class="form-control form-control-sm" required="required"
+                            <input type="number" class="form-control form-control-sm" required="required"
                                 id="idceporigemadd" name="addceporigem" placeholder="Cep origem (numero apenas)"
-                                aria-label=".form-control-sm addceporigem" minlength="8" maxlength="8" onkeyup="buscarcep()">
+                                aria-label=".form-control-sm addceporigem" minlength="8" maxlength="8" onkeyup="">
 
                             <label for="idcepdestinoadd" class="form-label">Cep do destino</label>
-                            <input type="cep" class="form-control form-control-sm" required="required"
+                            <input type="number" class="form-control form-control-sm" required="required"
                                 id="idcepdestinoadd" name="addcepdestino" placeholder="Cep destino (numero apenas)"
                                 aria-label=".form-control-sm addcepdestino" minlength="8" maxlength="8">
 
                             <label for="idpesoadd" class="form-label">Peso (gramas)</label>
                             <input type="number" class="form-control form-control-sm" required="required" id="idpesoadd"
-                                name="addpeso" placeholder="peso" aria-label=".form-control-sm addpeso" min='0' max='12000' onkeyup="escolhervalor()">
-                            
-                            <label for="idvaloradd" class="form-label">Valor</label>
-                            <input type="number" class="form-control form-control-sm" required="required" id="idvaloradd"
-                                name="addvalor" placeholder="(Digite um peso)" aria-label=".form-control-sm addvalor" disabled>
+                                name="addpeso" placeholder="peso" aria-label=".form-control-sm addpeso" min='0'
+                                max='12000' onkeyup="escolhervalor()">
+
+                            <label for="idvaloraddfalso" class="form-label">Valor</label>
+                            <input type="number" class="form-control form-control-sm" required="required"
+                                id="idvaloraddfalso" placeholder="(Digite um peso)" disabled>
+
+                            <input type="hidden" class="form-control form-control-sm" required="required"
+                                id="idvaloradd" name="addvalor" placeholder="" aria-label=".form-control-sm addvalor">
+                            <input type="hidden" id="idusuarioadd" name="addusuario"
+                                value="<?php echo $_SESSION['idusuario']; ?>">
                         </div>
                         <center>
-                            <button type="submit" class="btnadicionarentrega"
-                                id="btnadicionarentrega">Adicionar</button>
+                            <button type="submit" class="btnadicionarentrega" id="btnadicionarentrega">Pedir</button>
                         </center>
                     </form>
                 </div>
@@ -164,6 +144,7 @@ if (!isset($_SESSION['idusuario'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-        <script src="js/func.js"></script>
-    </body >
-</html >
+    <script src="js/func.js"></script>
+</body>
+
+</html>

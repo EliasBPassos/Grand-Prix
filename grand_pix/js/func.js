@@ -91,7 +91,7 @@ function fazerlogin() {
 function fazercadastro() {
     var usuario = document.getElementById('inusuariocad').value;
     var senha = document.getElementById('insenhacad').value;
-    
+
     var erromsg = document.getElementById('erromsg');
     var qntdsenha = senha.length;
     if (usuario === "" && senha === "") {
@@ -117,7 +117,7 @@ function fazercadastro() {
     }
 
     mostrarprocessando();
-    
+
     fetch('cadastro.php', {
         method: 'POST',
         headers: {
@@ -157,23 +157,26 @@ function fazercadastro() {
 
 function carregarConteudo(controle) {
 
-    fetch('controle.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'controle=' + encodeURIComponent(controle),
-    })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('conteudo').innerHTML = data;
+    if (controle) {
+        fetch('controle.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'controle=' + encodeURIComponent(controle),
         })
-        .catch(error => console.error('Erro na requisição:', error));
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('conteudo').innerHTML = data;
+            })
+            .catch(error => console.error('Erro na requisição:', error));
+    }
 }
 
 function escolhervalor() {
     var peso = document.getElementById("idpesoadd").value;
-    var valorInput = document.getElementById("idvaloradd"); // Pegando o elemento de entrada do valor
+    var valorInputFalso = document.getElementById("idvaloraddfalso");
+    var valorInput = document.getElementById("idvaloradd");
     var novoValor;
 
     if (peso < 1000) {
@@ -186,12 +189,13 @@ function escolhervalor() {
         novoValor = 12;
     }
 
-    valorInput.value = novoValor; // Definindo o novo valor no campo de entrada
+    valorInput.value = novoValor;
+    valorInputFalso.value = novoValor;
 }
 
-const modaladdadm = document.getElementById('modaladdadm');
-const idadmadd = document.getElementById('idadmadd');
-const btnadicionaradm = document.getElementById("btnadicionaradm");
+const modaladdentrega = document.getElementById('modaladdentrega');
+const idceporigemadd = document.getElementById('idceporigemadd');
+const btnadicionarentrega = document.getElementById("btnadicionarentrega");
 
 const modaladdcarro = document.getElementById('modaladdcarro');
 const idmodeloadd = document.getElementById('idmodeloadd');
@@ -248,7 +252,7 @@ function modaladd(nomemodal1, nome_formulario1, btnAdicionar1, idAdd1, controle1
     }
 }
 
-modaladd(modaladdadm, "formulario_adicionar_adm", btnadicionaradm, idadmadd, "admadd", 'listaradm', false, "");
+modaladd(modaladdentrega, "formulario_adicionar_entrega", btnadicionarentrega, idceporigemadd, "entregaadd", '', false, "");
 modaladd(modaladdcarro, "formulario_adicionar_carro", btnadicionarcarro, idmodeloadd, "carroadd", 'listarcarro', true, "idfotoadd");
 modaladd(modaladdcliente, "formulario_adicionar_cliente", btnadicionarcliente, idclienteadd, "clienteadd", 'listarcliente', false, "");
 
@@ -298,7 +302,7 @@ function abrirModalEdicaoCarro(idcarro, modelo, grupo) {
     carromodelo.value = modelo;
     carrogrupo.value = grupo;
     document.getElementById('idcarroedit').value = idcarro;
-    
+
     abrirFecharModal('modaleditcarro', 'A');
 }
 
@@ -306,11 +310,11 @@ function abrirModalComprarCarro(idcarro) {
 
     var idclientecomprar = document.getElementById('idclientecomprar');
 
-    if (idclientecomprar){
+    if (idclientecomprar) {
         idclientecomprar.focus();
     }
 
-    
+
     document.getElementById('incarrocomprarid').value = idcarro;
     document.getElementById('idvalorcomprar').value = "";
     abrirFecharModal('modalcomprarcarro', 'A');
@@ -358,7 +362,7 @@ document.getElementById("formulario_comprar_carro").addEventListener('submit', f
 
     var formData = new FormData(this);
     formData.append('controle', 'comprarcarro');
-    
+
     fetch('controle.php', {
         method: 'POST',
         body: formData,
@@ -397,7 +401,7 @@ function barraDePesquisa() {
         if (id.innerHTML.toUpperCase().indexOf(filter) > -1) {
 
             tr[i].style.display = "";
-            
+
         } else {
             if (modelo.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -429,7 +433,7 @@ function barraDePesquisaCliente() {
         if (id.innerHTML.toUpperCase().indexOf(filter) > -1) {
 
             tr[i].style.display = "";
-            
+
         } else {
             if (modelo.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -461,7 +465,7 @@ function barraDePesquisaVendas() {
         if (id.innerHTML.toUpperCase().indexOf(filter) > -1) {
 
             tr[i].style.display = "";
-            
+
         } else {
             if (modelo.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";

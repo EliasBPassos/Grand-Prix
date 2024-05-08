@@ -148,6 +148,32 @@ function InsertQuatroId($Campos, $tabela, $CampoValor1, $CampoValor2, $CampoValo
     };
     $conn = null;
 }
+function InsertCincoId($Campos, $tabela, $CampoValor1, $CampoValor2, $CampoValor3, $CampoValor4, $CampoValor5)
+{
+    $conn = conectar();
+    try {
+        $conn->beginTransaction();
+        $sqlLista = $conn->prepare("INSERT INTO $tabela ($Campos) VALUES (?, ?, ?, ?, ?)");
+        $sqlLista->bindValue(1, $CampoValor1, PDO::PARAM_INT);
+        $sqlLista->bindValue(2, $CampoValor2, PDO::PARAM_INT);
+        $sqlLista->bindValue(3, $CampoValor3, PDO::PARAM_STR);
+        $sqlLista->bindValue(4, $CampoValor4, PDO::PARAM_STR);
+        $sqlLista->bindValue(5, $CampoValor5, PDO::PARAM_STR);
+        $sqlLista->execute();
+        $conn->commit();
+        $IdInsertRetorno = $conn->lastInsertId();
+        if ($sqlLista->rowCount() > 0) {
+            return $IdInsertRetorno;
+        } else {
+            return 'Vazio';
+        };
+    } catch (PDOException $e) {
+        echo 'Exception -> ';
+        return ($e->getMessage());
+        $conn->rollback();
+    };
+    $conn = null;
+}
 function listarId($campos, $tabela, $campoId, $campoIdValor)
 {
     $conn = conectar();

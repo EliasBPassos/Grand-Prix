@@ -21,6 +21,12 @@ body {
     background-color: #EBE6E0;
 }
 
+.tableshadow {
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+    gap: 5px
+}
+
 .formLogin {
     display: flex;
     flex-direction: column;
@@ -98,36 +104,4 @@ body {
     transform: scale(1.05);
     background-color: #744F28;
 
-}
-
-.curve {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 255px;
-    width: 100%;
-    bottom: 0;
-}
-
-.curve::before {
-    content: '';
-    display: block;
-    position: absolute;
-    border-radius: 100% 50%;
-    width: 55%;
-    height: 100%;
-    background-color: #EBE6E0;
-    transform: translate(85%, 60%)
-}
-
-.curve::after {
-    content: '';
-    display: block;
-    position: absolute;
-    border-radius: 100% 50%;
-    width: 55%;
-    height: 100%;
-    background-color: #744F28;
-    transform: translate(-4%, 40%);
-    z-index: -1;
 }

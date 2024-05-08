@@ -1,41 +1,47 @@
-<div class="container-fluid mt-5" style="background-color: white; color: black;">
+<div class="container-fluid mt-4 mb-4 px-4" style="background-color: white; color: black;">
     <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-12 d-flex justify-content-between">
             <h2><strong>Entregas:</strong></h2>
-        </div>
-        <div class="col-md-9">
-
-        </div>
-        <div class="col-md-2 mt-1">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modaladdentrega">
-                Pedir entrega
+            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#modaladdentrega">
+                Fazer pedido
             </button>
         </div>
     </div>
-    <div class="container-fluid text-center" style="background-color: #aaaaaa">
+    <div class="container-fluid text-center mt-3">
         <?php
-        $retornotabela = listarId("foto, motoboy, inicio, previsao, valor", 'pedido', 'idusuario', $_SESSION['idusuario']);
+        $retornotabela = listarId("idmotoboy, inicio, previsao, valor", 'pedido', 'idusuario', $_SESSION['idusuario']);
         if ($retornotabela != 'Vazio') {
             ?>
-            <table>
-                <thead>
+            <table class="table table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <td>Pedido</td>
-                        <td></td>
+                        <td style="width: 10%" >Pedido</td>
+                        <td style="width: 40%">inicio</td>
+                        <td style="width: 40%">previsao</td>
+                        <td style="width: 10%">valor</td>
                     </tr>
                 </thead>
-                <?php
-                $idpedido = 0;
-                foreach ($retornotabela as $itemretorno) {
-                    $idpedido += 1;
-                    $foto = $itemretorno->foto;
-                    $motoboy = $itemretorno->motoboy;
-                    $inicio = $itemretorno->inicio;
-                    $previsão = $itemretorno->previsão;
-                    $valor = $itemretorno->valor;
+                <tbody>
+                    <?php
+                    $idpedido = 0;
+                    foreach ($retornotabela as $itemretorno) {
+                        $idpedido += 1;
+                        $inicio = $itemretorno->inicio;
+                        $previsao = $itemretorno->previsao;
+                        $valor = $itemretorno->valor;
+                        ?>
+                        <tr>
+                            <td><?php echo $idpedido?></td>
+                            <th><?php echo $inicio?></th>
+                            <th><?php echo $previsao?></th>
+                            <th><?php echo $valor?></th>
+                        </tr>
 
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+
             </table>
 
             <?php

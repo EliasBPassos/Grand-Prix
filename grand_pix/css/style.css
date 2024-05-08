@@ -22,16 +22,11 @@ body{
     cursor: pointer;
 }
 
-#others{
-    background-color: #2c2c2c;
-}
-
 /* Modal Add Carro */
 
 .modal-body{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 20px;
-    background-image: linear-gradient(#e35f21, #2c2c2c);
 
 }
 
